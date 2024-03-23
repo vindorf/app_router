@@ -36,15 +36,8 @@ export default function Home() {
     >
       <div
        className="text-white absolute inset-0 flex flex-col justify-start items-center m-auto" 
-       style={{ 
-         backgroundImage: `url('https://m.media-amazon.com/images/M/MV5BMzQwZDg1MGEtN2E5My00ZDJlLWI4MzItM2U2MjJhYzlkNmEzXkEyXkFqcGdeQXVyNDAxNjkxNjQ@._V1_SX300.jpg')`,
-         backgroundRepeat: 'no-repeat',
-         backgroundSize: 'cover',
-         width: '70%',
-         height: '100%'
-       }}
       >
-        <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-70">
+        <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
         <b className="text-[50px]">Main Page</b>
         </div>
       
@@ -58,7 +51,7 @@ export default function Home() {
             <p>{session?.user?.email} </p>
           </div>
           <DeleteBtn
-            className='w-30 font-extralight text-xs text-zinc-700 rounded'
+            className='w-30 font-extralight text-xs border bg-zinc-500 hover:text-zinc-500 rounded'
             label="Delete account"
             value={`${session?.user?.email}`}
             onDelete={handleConfirm}
@@ -69,3 +62,10 @@ export default function Home() {
     </main>
   );
 }
+      //  style={{ 
+      //    backgroundImage: `url('https://m.media-amazon.com/images/M/MV5BMzQwZDg1MGEtN2E5My00ZDJlLWI4MzItM2U2MjJhYzlkNmEzXkEyXkFqcGdeQXVyNDAxNjkxNjQ@._V1_SX300.jpg')`,
+      //    backgroundRepeat: 'no-repeat',
+      //    backgroundSize: 'cover',
+      //    width: '60%',
+      //    height: '70%'
+      //  }}
