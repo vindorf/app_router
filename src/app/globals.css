@@ -1,0 +1,9 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+a {
+    background-color: rgb(244 244 245);
+    text-align: end;
+}
