@@ -9,6 +9,7 @@ import { MdOutlineDetails } from "react-icons/md";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { userPost } from "../api/userpostapi";
 
 
 export const submitHandler = async (formData: FormData) => {
@@ -41,6 +42,8 @@ export default async function PostList() {
  }
     
 const apiData = await getPost();
+const posts = await userPost(session?.user?.email);
+console.log(posts);
 
     return (
         <div className="flex flex-col justify-center items-center my-24">
@@ -56,11 +59,12 @@ const apiData = await getPost();
                     type="text"
                     name="title"
                     /> 
-                    <input 
+                    <input
+                    hidden 
                     className="text-sm h-10 w-full  focus:outline-none focus:border pl-3"
                     type="text" 
                     name= "email"
-                    value={session?.user?.email}
+                    defaultValue={session?.user?.email}
                     />                 
                     <textarea 
                     className="text-sm w-full  focus:outline-none focus:border pl-3"
@@ -74,7 +78,7 @@ const apiData = await getPost();
             </div>
             <h1 className="text-xl mt-24 mb-6"
             >Post List</h1> 
-            {apiData && apiData.map((e, i) => (
+            {posts && posts.map((e:any, i:any) => (
                 <div key={i} className="ml-24 lg:w-[700px] md:w-[600px] sm:w-[400px] xs:w-[300px] mt-5 border rounded flex justify-center" >
                     <a
                     className=" flex flex-1 w-[450px] items-center justify-center py-2  shadow hover:shadow-lg"
