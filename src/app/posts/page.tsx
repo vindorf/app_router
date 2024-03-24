@@ -3,7 +3,6 @@ import { revalidatePath } from "next/cache";
 import addPost from "../api/addpostapi";
 import SubmitBtn from "../components/SubmitBtn";
 import DeleteBtn from "../components/DeleteBtn";
-import deletePost from "../api/deletepostapi";
 import { MdOutlineDetails } from "react-icons/md";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -47,7 +46,7 @@ export default async function PostList() {
     
 
 const posts = await userPost(session?.user?.email);
-//console.log(posts);
+
 
     return (
         <div className="flex flex-col justify-center items-center my-24">
