@@ -44,7 +44,7 @@ export default function Home() {
       {session && (
         <div className="w-full flex flex-col items-start p-4  rounded mt-14 gap-3 bg-zinc-900 opacity-80">
           <b>Welcome {toCap(session?.user?.role)}</b>
-          <div className="grid grid-cols-2 font-extralight text-right gap-2">
+          <div className=" grid grid-cols-2 font-extralight text-right gap-2">
             <p>Name:</p>
             <p>{session?.user?.name}</p>
             <p>Email:</p>
