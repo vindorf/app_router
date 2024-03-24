@@ -17,6 +17,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    posts:[{ type: Schema.Types.ObjectId, ref: 'Post' }],
 },
 {timestamps: true},
 );

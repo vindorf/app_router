@@ -17,6 +17,7 @@ export const submitHandler = async (formData: FormData) => {
     await addPost({   
             title: formData.get('title') as string,
             post: formData.get('post') as string,
+            email: formData.get('email') as string,
     })
      
     revalidatePath('/posts'); 
@@ -54,7 +55,13 @@ const apiData = await getPost();
                     placeholder="Title"
                     type="text"
                     name="title"
-                    />                  
+                    /> 
+                    <input 
+                    className="text-sm h-10 w-full  focus:outline-none focus:border pl-3"
+                    type="text" 
+                    name= "email"
+                    value={session?.user?.email}
+                    />                 
                     <textarea 
                     className="text-sm w-full  focus:outline-none focus:border pl-3"
                     placeholder="Post"
