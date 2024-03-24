@@ -4,15 +4,15 @@ import { cn } from "../utils/cn";
 
 type Props = {
     label: string;
-    value: string;
-    onDelete: (value:string) => void;
+    value: any;
+    onDelete: (value:any) => void;
     className?: any
 }
 export default  function DeleteBtn({className, label, value, onDelete, ...props}: Props) {
      const clickHandler = async () => {
 
     try{
-        await onDelete(value)
+         onDelete(value)
     } catch(error) {
         console.log('Error deleting post', error)
     }

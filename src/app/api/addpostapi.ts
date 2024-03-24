@@ -17,7 +17,9 @@ const addPost = async ({email, title, post}: addPostProps) => {
         const newPost = await new Post({
             title: title,
             post: post,
+            user: user._id
         })
+         
         await newPost.save();
         await user.posts.push(newPost._id);
         await user.save();

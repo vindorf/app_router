@@ -1,7 +1,6 @@
 
 import { revalidatePath } from "next/cache";
 import addPost from "../api/addpostapi";
-import getPost from "../api/postapi";
 import SubmitBtn from "../components/SubmitBtn";
 import DeleteBtn from "../components/DeleteBtn";
 import deletePost from "../api/deletepostapi";
@@ -10,6 +9,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { userPost } from "../api/userpostapi";
+import { deleteUserPost } from "../api/deleteuserpost";
 
 
 export const submitHandler = async (formData: FormData) => {
@@ -25,10 +25,14 @@ export const submitHandler = async (formData: FormData) => {
     
 }
 
-export const deleteHandler = async (_id:string) => {
-   "use server"
+export const deleteHandler = async ( ID:string) => {
+    "use server"
+    const session = await getServerSession(authOptions)
+    const email = session?.user?.email;
+    const id = JSON.parse(ID)
+   
     
-       await deletePost(_id) 
+       await deleteUserPost({_id: id,email: email}) 
        revalidatePath('/posts')
 };
 
@@ -41,9 +45,9 @@ export default async function PostList() {
    redirect('/login')
  }
     
-const apiData = await getPost();
+
 const posts = await userPost(session?.user?.email);
-console.log(posts);
+//console.log(posts);
 
     return (
         <div className="flex flex-col justify-center items-center my-24">
@@ -84,11 +88,13 @@ console.log(posts);
                     className=" flex flex-1 w-[450px] items-center justify-center py-2  shadow hover:shadow-lg"
                      href={`/posts/${e._id}`}>{e.title}
                      <MdOutlineDetails className='h-full ml-2 '/>
-                    </a>             
+                    </a>   
+                              
                   <DeleteBtn 
                   label="X"
-                  value={`${e._id}`} 
-                  onDelete={deleteHandler}/>  
+                  value={JSON.stringify(e._id)}  
+                  onDelete={deleteHandler}  
+                  />
                 </div>
             ))}
               
