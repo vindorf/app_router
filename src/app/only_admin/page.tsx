@@ -6,10 +6,13 @@ import getPost from "../api/postapi";
 import DeleteBtn from "../components/DeleteBtn";
 import deletePost from "../api/deletepostapi";
 import { revalidatePath } from "next/cache";
+import CustomBtn from "../components/CustomBtn";
+
 
 const AdminPage = async () => {
   const session = await getServerSession(authOptions);
   const posts = await getPost();
+  
 
   const handleDelete = async (_id: string) => {
     "use server";
@@ -34,12 +37,17 @@ const AdminPage = async () => {
         )}
       </Container>
       {session?.user?.role === "admin" && (
-        <div>
+     <div>
           {posts &&
             posts.map((e, i) => (
-              <Container key={i} className="mt-6" label={`Post: ${e.title}`}>
-                <p>User: {e.user.name}</p>
-                <p>Email: {e.user.email}</p>
+              <Container key={i} className="mt-6 " label={`Post title: ${e.title}`}>
+                <div className="grid grid-cols-2 text-right gap-2 mx-2 font-thin text-zinc-900">
+                <p>User: </p>
+                <p className="text-left">{e.user.name}</p>
+                <p>Email: </p>
+                <p className="text-left">{e.user.email}</p>
+                </div>
+                <p className="text-xs font-extralight my-2 p-1 bg-white rounded"> Id: {JSON.stringify(e.user._id)}</p>
                 <DeleteBtn
                   className="w-3/4 mt-4 font-light text-xs py-1"
                   label="Delete"
