@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "../components/Container";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -6,13 +6,15 @@ import getPost from "../api/postapi";
 import DeleteBtn from "../components/DeleteBtn";
 import deletePost from "../api/deletepostapi";
 import { revalidatePath } from "next/cache";
-import CustomBtn from "../components/CustomBtn";
+import { redirect } from "next/navigation";
 
 
 const AdminPage = async () => {
   const session = await getServerSession(authOptions);
   const posts = await getPost();
-  
+   if(!session) {
+    redirect('/')
+   }
 
   const handleDelete = async (_id: string) => {
     "use server";
