@@ -1,15 +1,19 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
-import DeleteBtn from "./components/DeleteBtn";
 import axios from "axios";
 import { toCap } from "./utils/cap";
 import { useState } from "react";
 import { Modal, ModalBody } from "./components/Modal";
-import CustomBtn from "./components/CustomBtn";
+import CustomInput from "./components/CustomInput";
+
 
 export default function Home() {
   const { data: session } = useSession();
   const [isModal, setIsModal] = useState(false);
+
+  const currrentUserName = session?.user?.name as string;
+  const currentUserEmail = session?.user?.email as string;
+  const currentUserRole = session?.user?.role as string;
 
   const handleModal = () => {
     setIsModal(!isModal);
@@ -25,6 +29,8 @@ export default function Home() {
     }
   };
 
+  const handleUpdate = async () => {}
+
 
   return (
     <main
@@ -38,16 +44,31 @@ export default function Home() {
       <div className="text-white absolute inset-0 flex flex-col justify-start items-center m-auto">
         <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
           <b className="text-[50px]">Main Page</b>
-          <div className="m-2 ml-0 ">
+          
+        </div>
+
+        {session && (
+          <div className="w-full flex flex-col items-start p-4  rounded mt-14 gap-1 bg-zinc-900 opacity-80">
+            <b className="text-[50px]">Welcome {toCap(currrentUserName)}</b>
+            <div className="flex justify-between items-center w-full">
+              <div>
+              <p>{currentUserEmail} </p>
+              </div>            
+              <div className=" ">
             <p
               className="cursor-pointer hover:underline text-xs mt-3"
               onClick={handleModal}
             >
-              Delete Account
+              Account Settings
             </p>
             <Modal isOpen={isModal}>
-              <ModalBody label="Are you sure to remove your account?">
-                <div className="flex justify-between">
+              <ModalBody label="Update or delete your account.">
+                <div>
+                  <CustomInput className='border' type="text" placeholder={currrentUserName} name="name"/>
+                  <CustomInput className='border' type="text" placeholder={currentUserEmail} name="email"/>
+                  <CustomInput className='border' type="text" placeholder={currentUserRole} name="role"/>
+                </div>
+                <div className="flex justify-between w-full">
                 <p
                   className="cursor-pointer hover:underline text-xs mt-3"
                   onClick={handleModal}
@@ -56,25 +77,21 @@ export default function Home() {
                 </p>
                 <p
                   className="cursor-pointer hover:underline text-xs mt-3"
+                  onClick={handleUpdate}
+                >
+                  Update
+                </p>
+                <p
+                  className="cursor-pointer hover:underline text-xs mt-3"
                   onClick={handleDeleteUser}
                 >
-                  Confirm
+                  Delete
                 </p>
                 </div>
                
               </ModalBody>
             </Modal>
-          </div>
-        </div>
-
-        {session && (
-          <div className="w-full flex flex-col items-start p-4  rounded mt-14 gap-3 bg-zinc-900 opacity-80">
-            <b>Welcome {toCap(session?.user?.role)}</b>
-            <div className=" grid grid-cols-2 font-extralight text-right gap-2">
-              <p>Name:</p>
-              <p>{session?.user?.name}</p>
-              <p>Email:</p>
-              <p>{session?.user?.email} </p>
+              </div>
             </div>
           </div>
         )}
