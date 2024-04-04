@@ -12,7 +12,8 @@ import CustomInput from "./components/CustomInput";
 
 export default function Home() {
   const { data: session, update } = useSession();
-  const [isModal, setIsModal] = useState(false);
+  const [isModalAccount, setIsModalAccount] = useState(false);
+  const [isModalPw, setIsModalPw] = useState(false);
   const [input, setInput] = useState({name: "", email: "", role: "" });
   const [msg,setMsg] = useState("");
 
@@ -20,9 +21,13 @@ export default function Home() {
   const currentUserEmail = session?.user?.email as string;
   const currentUserRole = session?.user?.role as string;
 
-  const handleModal = () => {
-    setIsModal(!isModal);
+  const handleModalAccount = () => {
+    setIsModalAccount(!isModalAccount);
   };
+
+  const handleModalPw = () => {
+    setIsModalPw(!isModalPw);
+  }
 
   const handleDeleteUser = async () => {
     const userEmail = JSON.stringify(session?.user?.email)
@@ -84,11 +89,11 @@ export default function Home() {
               <div>
             <p
               className="cursor-pointer hover:underline text-xs mt-3"
-              onClick={handleModal}
+              onClick={handleModalAccount}
             >
               Account Settings
             </p>
-            <Modal isOpen={isModal}>
+            <Modal isOpen={isModalAccount}>
               <ModalBody label="Update or delete your account. After update login again.">
                 <div className="flex flex-col">
                   <CustomInput func={handleInputChange} className='border' type="text" placeholder={currrentUserName} name="name"/>
@@ -108,7 +113,7 @@ export default function Home() {
                 <div className="flex justify-between w-full">
                 <p
                   className="cursor-pointer hover:underline text-xs mt-3"
-                  onClick={handleModal}
+                  onClick={handleModalAccount}
                 >
                   Close
                 </p>
@@ -129,6 +134,22 @@ export default function Home() {
               </ModalBody>
             </Modal>
               </div>
+              <p
+              className="cursor-pointer hover:underline text-xs mt-3"
+              onClick={handleModalPw}
+            >
+              Change Password
+            </p>
+            <Modal isOpen={isModalPw}>
+              <ModalBody label="Change your Password then login again.">
+              <p
+                  className="cursor-pointer hover:underline text-xs mt-3"
+                  onClick={handleModalPw}
+                >
+                  Close
+                </p>
+              </ModalBody>
+            </Modal>
             </div>
           </div>
         )}
