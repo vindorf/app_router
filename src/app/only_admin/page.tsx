@@ -42,24 +42,29 @@ const AdminPage = async () => {
       </Container>
       {session?.user?.role === "admin" && (
      <div>
+      <p className="text-center mt-3">All posts</p>
           {posts.length > 0 &&
             posts.map((e, i) => (
-              <Container key={i} className="mt-6 w-64" label={`Post title: ${e.title}`}>
-                <div className="grid grid-cols-2 text-right gap-2 mx-2 font-thin text-zinc-900">
-                <p>User: </p>
-                <p className="text-left">{e.user.name != null? `${e.user.name}`: 'no user'}</p>
-                <p>Email: </p>
-                <p className="text-left">{e.user?.email}</p>
-                </div>
-                <p className="text-xs font-extralight my-2 p-1 bg-white rounded"> Id: {JSON.stringify(e.user._id)}</p>
-                <Link href={`only_admin/${e.user._id}`}>All post of this user</Link>
+              <div key={i} className="mt-6 m-auto w-64 bg-zinc-100 pb-3 border-b font-light" >
+                <p>Posttitle: </p>
+                <p className="text-left">{e.title}</p>
+                <p>Post: </p>
+                <p className="text-left">{e.post}</p>
+                
+                <p className="text-xs font-extralight my-2 p-1 bg-white rounded"> UserId: {e.user?._id}</p>
+                <div className="w-full">
+                <Link 
+                className="flex w-full mt-4 font-light text-xs py-1 justify-center shadow-lg hover:bg-zinc-300 bg-zinc-200"
+                href={`only_admin/${e.user?._id}`}>All posts of this user</Link>
                 <DeleteBtn
-                  className="w-3/4 mt-4 font-light text-xs py-1"
-                  label="Delete"
+                  className="w-full mt-4 font-light text-xs py-1 shadow-lg"
+                  label="Delete post"
                   value={JSON.stringify(e._id)}
                   onDelete={handleDelete}
                 />
-              </Container>
+                </div>
+              
+              </div>
             ))}
         </div>
       )}

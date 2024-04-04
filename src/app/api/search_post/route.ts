@@ -7,9 +7,9 @@ import { authOptions } from "../auth/[...nextauth]/route";
 export async function GET(req: NextRequest, res: NextResponse) {
     const session = await getServerSession( authOptions);
     console.log('SESSIONSERVER', session)
-    // if(!session) {
-    //     return NextResponse.json('Login first')
-    // }
+    if(!session) {
+        return NextResponse.json('Login first')
+    }
     try{
         await connectDB();
         const searchParams = req.nextUrl.searchParams;

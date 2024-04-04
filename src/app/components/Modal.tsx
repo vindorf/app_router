@@ -44,7 +44,7 @@ type ModBoadyProps = {
 }
 
 export function ModalBody({children, label}: ModBoadyProps) {
-    return <form className='border m-1 p-1 w-[20rem] flex flex-col items-center' >
+    return <form className='border m-1 p-1 w-[22rem] flex flex-col items-center' >
         <h1>{label} </h1>
         {children}
         </form>
