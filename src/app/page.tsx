@@ -7,9 +7,14 @@ import { Modal, ModalBody } from "./components/Modal";
 import CustomInput from "./components/CustomInput";
 
 
+
+
+
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [isModal, setIsModal] = useState(false);
+  const [input, setInput] = useState({name: "", email: "", role: "" });
+  const [msg,setMsg] = useState("");
 
   const currrentUserName = session?.user?.name as string;
   const currentUserEmail = session?.user?.email as string;
@@ -29,7 +34,29 @@ export default function Home() {
     }
   };
 
-  const handleUpdate = async () => {}
+  const handleInputChange = (e: any) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = async () => {
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if(!emailRegex.test(input.email)) {
+      setMsg('Please enter a valid email')
+      return;
+    }
+
+    try{
+      await axios.post("/api/update_user", {oldEmail: currentUserEmail, 
+      name: input.name ? input.name : currrentUserName, 
+      email:input.email ? input.email : currentUserEmail, 
+      role: input.role ? input.role : currentUserRole
+    })
+      signOut();
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
 
   return (
@@ -54,7 +81,7 @@ export default function Home() {
               <div>
               <p>{currentUserEmail} </p>
               </div>            
-              <div className=" ">
+              <div>
             <p
               className="cursor-pointer hover:underline text-xs mt-3"
               onClick={handleModal}
@@ -62,11 +89,21 @@ export default function Home() {
               Account Settings
             </p>
             <Modal isOpen={isModal}>
-              <ModalBody label="Update or delete your account.">
-                <div>
-                  <CustomInput className='border' type="text" placeholder={currrentUserName} name="name"/>
-                  <CustomInput className='border' type="text" placeholder={currentUserEmail} name="email"/>
-                  <CustomInput className='border' type="text" placeholder={currentUserRole} name="role"/>
+              <ModalBody label="Update or delete your account. After update login again.">
+                <div className="flex flex-col">
+                  <CustomInput func={handleInputChange} className='border' type="text" placeholder={currrentUserName} name="name"/>
+                  <CustomInput func={handleInputChange} className='border' type="text" placeholder={currentUserEmail} name="email"/>
+                  {msg && <p className="font-light text-xs text-center">{msg} </p>}
+                  <p className="text-xs text-center">Current role is {currentUserRole}</p>
+                  <select 
+                  name="role" 
+                  id="role" 
+                  onChange={handleInputChange}
+                  className=" m-2 rounded h-6 font-light text-[14px] pl-3"
+                  >
+                    <option className="font-sans" value="user">user</option>
+                    <option className="font-sans" value='admin'>admin</option>
+                  </select>
                 </div>
                 <div className="flex justify-between w-full">
                 <p
