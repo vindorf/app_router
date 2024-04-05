@@ -49,7 +49,12 @@ const posts = await userPost(session?.user?.email);
 
 
     return (
-        <div className="flex flex-col justify-center items-center my-24">
+        <div className="flex flex-col justify-center items-center my-4 mb-24">
+            <div className="text-white w-3/4 inset-0 flex flex-col justify-start items-center ml-[100px]">
+             <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
+             <b className="text-[50px]">Post Page</b>
+             </div>
+             </div>
             <h1 className="text-xl mt-5 mb-10"
             >Add Post</h1>
             <div className="lg:w-[700px] md:w-[600px] sm:w-[400px] xs:w-[300px] ml-24">

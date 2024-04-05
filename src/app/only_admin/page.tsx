@@ -30,22 +30,26 @@ const AdminPage = async () => {
 
   return (
     <div className="mb-16">
-      <Container label="Info">
-        {session?.user?.role !== "admin" ? (
-          <div>Access denied for User</div>
+      <div className="text-white  inset-0 flex flex-col justify-start items-center ml-44">
+      <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
+          <b className="text-[50px]">Admin Page</b>
+          {session?.user?.role !== "admin" ? (
+          <div className="text-left">Access denied for User</div>
         ) : (
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start font-light">
             <h1>Welcome Admin</h1>
             <p>{session?.user?.email} </p>
           </div>
         )}
-      </Container>
+        </div>
+        </div>
+        
       {session?.user?.role === "admin" && (
      <div>
-      <p className="text-center mt-3">All posts</p>
+      <p className="text-center mt-3 border-b pb-3">All posts</p>
           {posts.length > 0 &&
             posts.map((e, i) => (
-              <div key={i} className="mt-6 m-auto w-64 bg-zinc-100 pb-3 border-b font-light" >
+              <div key={i} className="mt-6 m-auto w-64 bg-zinc-100 pb-5 border-b font-light" >
                 <p>Posttitle: </p>
                 <p className="text-left">{e.title}</p>
                 <p>Post: </p>
@@ -73,3 +77,15 @@ const AdminPage = async () => {
 };
 
 export default AdminPage;
+
+{/* <table style="border-collapse: collapse;">
+  <tr>
+    <td style="border: 1px solid black;">Zelle 1</td>
+    <td style="border: 1px solid black;">Zelle 2</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black;">Zelle 3</td>
+    <td style="border: 1px solid black;">Zelle 4</td>
+  </tr>
+</table> */}
+
