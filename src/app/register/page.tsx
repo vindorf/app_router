@@ -56,12 +56,12 @@ export default async function () {
             <CustomInput type="text" placeholder="Name" name="name" />
             <CustomInput
               type="text"
-              placeholder="Valid email format"
+              placeholder="Email"
               name="email"
             />
             <CustomInput
               type="password"
-              placeholder="Password 8 char"
+              placeholder="Password"
               name="password"
             />
           </ErrorBoundary>
