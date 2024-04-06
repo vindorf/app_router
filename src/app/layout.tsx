@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { AuthProvider } from "./context/AuthProvider";
 
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-zinc-100 text-zinc-500`}>  
         <AuthProvider>
         <Header />
-        {children}
+        {children}       
         <Footer />  
         </AuthProvider>
       </body>

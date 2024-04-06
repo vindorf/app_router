@@ -16,7 +16,7 @@ const registerUser = async ({name, email, password}: Props) => {
 
         const existingUser = await User.findOne({email});
         if(existingUser) {
-            return {error: 'User already exist',user: existingUser}
+            return {error: 'User already exist',user: existingUser, status: 400}
         };
 
         const hash = await bcrypt.hash(password, 10);
@@ -29,7 +29,7 @@ const registerUser = async ({name, email, password}: Props) => {
         });
         await user.save();
         console.log('User created server successfully')
-        return {user: user}
+        return {user: user, status: 200}
     } catch(error:any) {
         console.error('Error creating user:', error.message);
         throw new Error('Error creating User', error)
