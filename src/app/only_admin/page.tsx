@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "../components/Container";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import getPost from "../api/postapi";
@@ -8,6 +7,7 @@ import deletePost from "../api/deletepostapi";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Table from "../components/Table";
 
 
 const AdminPage = async () => {
@@ -72,20 +72,12 @@ const AdminPage = async () => {
             ))}
         </div>
       )}
+      <Table></Table>
     </div>
   );
 };
 
 export default AdminPage;
 
-{/* <table style="border-collapse: collapse;">
-  <tr>
-    <td style="border: 1px solid black;">Zelle 1</td>
-    <td style="border: 1px solid black;">Zelle 2</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Zelle 3</td>
-    <td style="border: 1px solid black;">Zelle 4</td>
-  </tr>
-</table> */}
+
 
