@@ -13,18 +13,15 @@ const submitHandler = async (formData: FormData) => {
   const emailRegex = /^\S+@\S+\.\S+$/;
 
   if (!pw || !email || !name) {
-    //return { error: "Please fill in all fields" };
-     //throw new Error('fill out')  
-    redirect('/register_error')
+    redirect(`/register/error_1`)
+    
     }
 
   if (pw.length < 8) {
-    //return { error: "Password must be at least 8 characters" };
-    redirect('/register_error')
+    redirect(`/register/error_2`)
   }
   if (!emailRegex.test(email)) {
-    //redirect("/register");
-    redirect('/register_error')
+    redirect(`/register/error_3`)
   }
   try {
     const res = await registerUser({
