@@ -36,7 +36,10 @@ const Account = () => {
 
       if (res?.status == 200) {
         router.push("/");
+      } else if(res?.status == 401) {
+        setMsg("Invalid credentials");
       }
+      return;
     } catch (error) {
       console.log("Error login", error);
     }
@@ -67,7 +70,7 @@ const Account = () => {
             <CustomBtn label="Login" func={login} />
           </div>
           {msg && (
-            <p className="text-zinc-500 font-extralight text-xs"> {msg} </p>
+            <p className="text-zinc-500 font-extralight text-xs text-center"> {msg} </p>
           )}
         </div>
       </Container>
