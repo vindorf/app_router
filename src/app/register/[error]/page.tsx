@@ -15,6 +15,9 @@ const RegisterError = ({ params }: { params: { error: string } }) => {
       case "error_3":
         setMsg("Enter valid email format");
         break;
+        case "error_4":
+          setMsg('User already exist');
+          break;
       default:
         setMsg("An unknown error occurred.");
         break;

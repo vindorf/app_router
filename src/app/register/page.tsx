@@ -11,6 +11,7 @@ const submitHandler = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const name = formData.get("name") as string;
   const emailRegex = /^\S+@\S+\.\S+$/;
+  let valid = ""
 
   if (!pw || !email || !name) {
     redirect(`/register/error_1`)
@@ -29,11 +30,21 @@ const submitHandler = async (formData: FormData) => {
       email: email,
       password: pw,
     });
-    console.log('RESPONSE',res)
+    if(res.status === 200) {
+      valid = 'ok';
+    }else if (res.status === 400) {
+      valid = 'error';
+    }
+    
   } catch (error) {
     console.log(error);
   }
-  redirect("/login");
+  
+  if(valid === 'ok') {
+    redirect('/login');
+  }else if (valid === 'error') {
+    redirect('/register/error_4') 
+  }
 };
 
 export default async function () {

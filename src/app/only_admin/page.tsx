@@ -30,7 +30,7 @@ const AdminPage = async () => {
 
   return (
     <div className="mb-16">
-      <div className="text-white  inset-0 flex flex-col justify-start items-center ml-44">
+      <div className="text-white  inset-0 flex flex-col justify-start items-center ml-44 mr-16">
       <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
           <b className="text-[50px]">Admin Page</b>
           {session?.user?.role !== "admin" ? (
