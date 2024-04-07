@@ -16,7 +16,7 @@ export default async function ProductList() {
 
   return (
     <div className="flex flex-col justify-start items-center">
-      <h1 className="text-xl mt-24 mb-16 w-full text-center"
+      <h1 className="text-xl text-white mt-24 mb-16 w-full text-center"
       >Product List</h1>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3 ml-28">

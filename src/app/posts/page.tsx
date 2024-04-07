@@ -55,7 +55,7 @@ const posts = await userPost(session?.user?.email);
              <b className="text-[50px]">Post Page</b>
              </div>
              </div>
-            <h1 className="text-xl mt-5 mb-10"
+            <h1 className="text-xl mt-5 mb-10 text-white"
             >Add Post</h1>
             <div className="lg:w-[700px] md:w-[600px] sm:w-[400px] xs:w-[300px] ml-24">
                 <form 
@@ -84,7 +84,7 @@ const posts = await userPost(session?.user?.email);
                     <SubmitBtn label="Submit"/>
                 </form>
             </div>
-            <h1 className="text-xl mt-24 mb-6"
+            <h1 className="text-xl text-white mt-24 mb-6"
             >Post List</h1> 
             {posts && posts.map((e:any, i:any) => (
                 <div key={i} className="ml-24 lg:w-[700px] md:w-[600px] sm:w-[400px] xs:w-[300px] mt-5 border rounded flex justify-center" >

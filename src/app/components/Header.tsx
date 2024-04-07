@@ -16,9 +16,9 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-zinc-200 opacity-80  fixed top-0 left-0 h-full flex flex-col justify-start gap-3 shadow-lg p-2 pt-5">
+    <div className="bg-zinc-200 fixed opacity-90 top-0 left-0 h-full flex flex-col justify-start gap-3 shadow-lg p-2 pt-5">
       {session && (
-        <div className="bg-zinc-200 opacity-80  fixed top-0 left-0 h-full flex flex-col justify-start gap-3 shadow-lg p-2 pt-5">
+        <div className="bg-zinc-200 opacity-100  fixed top-0 left-0 h-full flex flex-col justify-start gap-3 shadow-lg p-2 pt-5">
           <HeaderLink href="/" label="Main" />
           <HeaderLink href="/user" label="UserAPI" />
           <HeaderLink href="/products" label="ProdDB" />
