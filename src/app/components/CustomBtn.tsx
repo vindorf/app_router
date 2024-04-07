@@ -14,7 +14,7 @@ const CustomBtn = ({type, label, className, func, ...props}: Props) => {
     <button
     type={type}
     {...props}
-    className={cn('focus:outline-none focus:bg-zinc-300 py-4 flex h-6 justify-center m-2 my-0 rounded items-center text-white border border-white  hover:bg-zinc-300',className)}
+    className={cn('focus:outline-none focus:bg-zinc-300 py-4 flex h-6 justify-center m-2 my-0  items-center text-white border-white  hover:underline',className)}
     onClick={func}
     >{label} </button>
   )

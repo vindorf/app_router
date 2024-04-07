@@ -50,13 +50,19 @@ export default function Home() {
     }
 
     try {
-      await axios.post("/api/update_user", {
+      const res = await axios.post("/api/update_user", {
         oldEmail: currentUserEmail,
         name: input.name ? input.name : currrentUserName,
         email: input.email ? input.email : currentUserEmail,
         role: input.role ? input.role : currentUserRole,
       });
-      signOut();
+
+      if (res.data.status === 400) {
+        setMsg(res.data.message);
+        return;
+      } else if (res.data.status === 200) {
+        signOut();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -94,7 +100,7 @@ export default function Home() {
 
   return (
     <main
-      className="flex flex-col justify-start mx-auto ml-44 items-center relative"
+      className="flex flex-col justify-start mx-auto ml-64 items-center relative"
       style={{
         width: "80vw",
         height: "100vh",
@@ -102,7 +108,7 @@ export default function Home() {
       }}
     >
       <div className="text-white absolute inset-0 flex flex-col justify-start items-center m-auto">
-        <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
+        <div className="mt-24 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
           <b className="text-[50px]">Main Page</b>
         </div>
 
@@ -120,7 +126,7 @@ export default function Home() {
                 >
                   Account Settings
                 </p>
-                <Modal isOpen={isModalAccount}>
+                <Modal isOpen={isModalAccount} onAfterClose={() => setMsg("")}>
                   <ModalBody label="Update or delete your account. After update login again.">
                     <div className="flex flex-col">
                       <CustomInput
@@ -147,7 +153,7 @@ export default function Home() {
                         name="role"
                         id="role"
                         onChange={handleInputChange}
-                        className=" m-2 rounded h-6 font-light text-[14px] pl-3"
+                        className="bg-zinc-400 m-2 rounded h-6 font-light text-[14px] pl-3"
                       >
                         <option className="font-sans" value="user">
                           user
@@ -157,7 +163,7 @@ export default function Home() {
                         </option>
                       </select>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full border-t mt-3">
                       <p
                         className="cursor-pointer hover:underline text-xs mt-3"
                         onClick={handleModalAccount}
@@ -186,7 +192,7 @@ export default function Home() {
               >
                 Change Password
               </p>
-              <Modal isOpen={isModalPw}>
+              <Modal isOpen={isModalPw} onAfterClose={() => setMsg("")}>
                 <ModalBody label="Change your Password then login again.">
                   <div className="flex flex-col items-center">
                     <CustomInput
@@ -209,7 +215,7 @@ export default function Home() {
                       <p className="font-light text-xs text-center">{msg} </p>
                     )}
                   </div>
-                  <div className="flex justify-between w-full">
+                  <div className="flex justify-between w-full border-t mt-3">
                     <p
                       className="cursor-pointer hover:underline text-xs mt-3"
                       onClick={handleModalPw}

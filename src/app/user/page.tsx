@@ -80,7 +80,7 @@ const UserPage = () => {
     }
   };
   return (
-    <div className={`flex flex-col items-center mt-24 mb-24 ml-24`}>
+    <div className={`flex flex-col items-center mt-24 mb-24 ml-24 text-white`}>
       <h1 className="text-xl mb-5">User Page</h1>
       <div className="flex flex-col justify-center items-center my-5">
         <h1 className="">Search by ID</h1>
@@ -93,7 +93,7 @@ const UserPage = () => {
             onChange={(e) => setById(e.target.value)}
             className=" rounded-l focus:outline-none focus:border"
           />
-          <button className="rounded-r bg-zinc-200 hover:bg-zinc-300 px-3">
+          <button className="rounded-r bg-zinc-200 hover:bg-zinc-300 text-zinc-600 px-3">
             Search
           </button>
         </form>

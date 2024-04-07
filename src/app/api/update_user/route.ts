@@ -16,6 +16,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   try {
     await connectDB();
+
+    const emailExists = await User.findOne({ email: email});
+
+    if(emailExists) {
+      return NextResponse.json({message: 'Email occupied', status: 400})
+
+    }
+
     const updatedUser = await User.findOneAndUpdate(
       { email: oldEmail },
       { name: name, email: email, role: role },
@@ -24,6 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (updatedUser) {
       return NextResponse.json({
         message: "Benutzer erfolgreich aktualisiert",
+        status: 200,
         user: updatedUser,
       });
     } else {

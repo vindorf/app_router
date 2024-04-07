@@ -45,8 +45,8 @@ const AdminPage = async () => {
         </div>
         
       {session?.user?.role === "admin" && (
-     <div className="text-white">
-      <p className="text-center mt-3 border-b pb-3">All posts</p>
+     <div className="text-white flex flex-col items-center ml-5">
+      <p className="w-3/4 text-center mt-3 border-b pb-3">All posts</p>
           {posts.length > 0 &&
             posts.map((e, i) => (
               <div key={i} className="mt-6 m-auto w-64  pb-5 border-b font-light font" >

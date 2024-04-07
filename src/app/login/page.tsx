@@ -50,7 +50,9 @@ const Account = () => {
   };
   return (
     <>
-      <Container label="Login">
+      <Container 
+      className='text-white'
+      label="Login">
         <div>
           <div className="flex flex-col w-56 p-3 gap-3">
             <CustomInput
@@ -67,7 +69,9 @@ const Account = () => {
               value={input.password}
               func={handleInputChange}
             />
-            <CustomBtn label="Login" func={login} />
+            <CustomBtn 
+            className='border-t'
+            label="Login" func={login} />
           </div>
           {msg && (
             <p className="text-zinc-500 font-extralight text-xs text-center"> {msg} </p>

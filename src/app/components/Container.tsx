@@ -10,10 +10,10 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ label, children, className, ...props }) => {
   return (
-    <div className={cn("flex flex-col items-center justify-center w-56 m-auto shadow-md py-3 mt-24 bg-zinc-200 rounded h-70 opacity-90", className)}
+    <div className={cn("flex flex-col items-center justify-center w-[22rem] m-auto shadow-md py-3 mt-24 bg-zinc-300 rounded-lg h-70 opacity-90", className)}
     {...props}
     >
-     <h1>{label} </h1>
+     <b className="text-[22px] border-b w-full text-center">{label} </b>
       {children}
     </div>
   );

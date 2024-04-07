@@ -1,51 +1,58 @@
-import ReactModal from 'react-modal';
+import ReactModal from "react-modal";
 
 type Props = {
-    children: React.ReactNode;
-    isOpen: boolean;
+  children: React.ReactNode;
+  isOpen: boolean;
+  onAfterClose: () => void;
 };
 
 ReactModal.setAppElement("*");
 
-export function Modal({children, isOpen}: Props) {
-    const modStyle = {
-        overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-             zIndex: 1000,
-             display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            transform: "translate(-50%, -50%)",
-            with: "500px",
-            border: "1px solid"
-        },
-    };
+export function Modal({ children, isOpen, onAfterClose }: Props) {
+  const modStyle = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.7)",
+      zIndex: 1000,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%)",
+      with: "500px",
+      border: "none",
+      borderRadius: "20px",
+      color: "white",
+      backgroundColor: "lightgray",
+    },
+  };
 
-    return (
-        <ReactModal
-            isOpen={isOpen}
-            onRequestClose={() => {}}
-            style={modStyle}
-        >
-            {children}
-        </ReactModal>
-    );
+  return (
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={() => {}}
+      onAfterClose={onAfterClose}
+      style={modStyle}
+    >
+      {children}
+    </ReactModal>
+  );
 }
 
 type ModBoadyProps = {
-    children: React.ReactNode;
-    label: string;
-}
+  children: React.ReactNode;
+  label: string;
+};
 
-export function ModalBody({children, label}: ModBoadyProps) {
-    return <form className='border m-1 p-1 w-[22rem] flex flex-col items-center' >
-        <h1>{label} </h1>
-        {children}
-        </form>
+export function ModalBody({ children, label }: ModBoadyProps) {
+  return (
+    <form className="m-1 p-1 lg:w-[38rem] flex flex-col items-center">
+      <b className="text-[20px] border-b pb-3 mb-3">{label} </b>
+      {children}
+    </form>
+  );
 }

@@ -10,8 +10,8 @@ type Props = {
 
 const UserCard = ({id, name, email, company}: Props) => {
   return (
-    <div  className=' gap-3 border m-2 px-2 bg-zinc-200'>        
-          <a href={`/user/${id}`} className='bg-zinc-100 text-start my-4 border p-3 w-[400px] shadow-lg rounded grid grid-cols-2 grid-rows-4'>
+    <div  className=' gap-3 border rounded m-2 px-2 bg-zinc-200'>        
+          <a href={`/user/${id}`} className='bg-zinc-100 text-zinc-700 text-start my-4 border p-3 w-[400px] shadow-lg rounded grid grid-cols-2 grid-rows-4'>
             <p>UserId:</p>
             <p>{id} </p>
             <p className='text-sm mt-2'> Name: </p>

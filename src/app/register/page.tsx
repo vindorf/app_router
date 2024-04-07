@@ -50,7 +50,9 @@ const submitHandler = async (formData: FormData) => {
 export default async function () {
   return (
     <>
-      <Container label="Register">
+      <Container 
+      className='text-white'
+      label="Register">
         <form className="flex flex-col w-56 p-3 gap-3" action={submitHandler}>
           <ErrorBoundary>
             <CustomInput type="text" placeholder="Name" name="name" />
@@ -65,7 +67,9 @@ export default async function () {
               name="password"
             />
           </ErrorBoundary>
-          <CustomBtn type="submit" label="Register" />
+          <CustomBtn 
+          className='border-t'
+          type="submit" label="Register" />
         </form>
       </Container>
     </>
