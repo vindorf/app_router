@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import HeaderLink from "./HeaderLink";
 import LogoutBtn from "./LogoutBtn";
+import Switch from "./Theme";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -11,6 +12,7 @@ const Header = () => {
     <div className=" fixed opacity-90 top-0 left-0 h-full flex flex-col justify-start gap-3 shadow-lg px-5 pt-5">
       {session && (
         <div className="bg-zinc-900 opacity-80  fixed top-0 left-0 h-full flex flex-col justify-start gap-3 shadow-lg px-5 pt-5">
+          <Switch/>
           <HeaderLink href="/" label="Main" />
           <HeaderLink href="/user" label="UserAPI" />
           <HeaderLink href="/products" label="ProdDB" />

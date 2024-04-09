@@ -1,28 +1,49 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-export const useTheme = () => {
-    const [theme, setTheme] = useState('bg-[#84adad]')
 
-   const toggleTheme = () => {
-    if(theme == 'bg-[#84adad]') {
-        setTheme('bg-[#263236]');
-    }else if(theme == 'bg-[#84adad]') {
-        setTheme('bg-[#263236]')
+const Switch = () => {
+  const [mode, setMode] = useState(() => {
+    if( typeof localStorage!== "undefined") {
+      const storedMode = JSON.parse(localStorage.getItem("mode")!);
+    return storedMode === null? "light" : storedMode;
     }
-   }
+  });
+  useEffect(() => {
+    localStorage.setItem('mode', JSON.stringify(mode));
+},[mode])
 
-  return {theme, toggleTheme}
-     
+  
+useEffect(() => {
+  if (typeof document!== "undefined") {
+    if (mode === "dark") {
+      document.body.classList.remove("light");
+      document.body.classList.add("dark");
+    } else if (mode === "light") {
+      document.body.classList.remove("dark");
+      document.body.classList.add("light");
+    }
+  }
+}, [mode]);
+
+  const toggleMode = () => {
+    setMode((mode === 'light'? 'dark' : 'light'));
+    
+  };
+
+  return (
+    <div className="flex flex-col items-center border-b mt-2 py-2">
+      <label className="switch">
+        <input 
+        checked={mode == 'dark'}
+        onChange={toggleMode}
+        type="checkbox" />
+        
+        <span className="slider round"></span>
+      </label>
+      <span className="font-extralight text-xs">{mode == 'dark'? 'Light': 'Dark'}</span>
+    </div>
+  );
 };
 
-export const ModeSwitch = () => {
-    const { toggleTheme } = useTheme();
-
-    return (
-        <div className='flex justify-center'>
-            <button onClick={toggleTheme}>mode</button>
-        </div>
-    )
-};
-
+export default Switch;

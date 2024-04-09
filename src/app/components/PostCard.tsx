@@ -19,7 +19,7 @@ const PostCard = ({ title, post }: PostProps) => {
       </div>
       <div>
         <a
-          className="flex justify-center h-full items-center text-zinc-400 bg-zinc-200  mx-5  shadow-xl hover:bg-zinc-300 px-1 rounded"
+          className="flex justify-center h-full items-center  bg-zinc-200  mx-5  shadow-xl hover:bg-zinc-300 px-1 rounded"
           href="/posts"
         >
           <MdOutlineKeyboardReturn />

@@ -7,7 +7,7 @@ export default async function ProductDetails({params}: {
 const data = await getOneProduct(params.id)
 
     return (
-        <div className='text-white flex justify-center items-center mt-44 ml-44'>
+        <div className=' flex justify-center items-center mt-44 ml-44'>
            <div className=' flex flex-col justify-between items-start w-[280px] h-[320px] mr-4 pr-4 border-r'>
             <h1 className=' '>{data.title} </h1>
              <div className='grid grid-cols-2 w-[190px]'>

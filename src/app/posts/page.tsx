@@ -50,32 +50,32 @@ const posts = await userPost(session?.user?.email);
 
     return (
         <div className="ml-16 mt-6 mb-24 flex flex-col items-center justify-center">
-            <div className="text-white w-3/4 inset-0 flex flex-col justify-center items-center ml-24">
+            <div className=" w-3/4 inset-0 flex flex-col justify-center items-center ml-24">
              <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
-             <b className="text-[50px]">Post Page</b>
+             <b className="text-[50px] text-white">Post Page</b>
              </div>
              
-            <h1 className="text-xl mt-5 mb-10 text-white"
+            <h1 className="text-xl mt-5 mb-10 "
             >Add Post</h1>
             <div className="lg:w-[700px] md:w-[600px] sm:w-[300px] xs:w-[300px] ml-3 flex felx-col items-center">
                 <form 
                 className="flex flex-col w-full m-auto gap-3"
                 action={submitHandler}>
                     <input 
-                    className="text-sm h-10 w-full  focus:outline-none focus:border pl-3"
+                    className="text-sm h-10 w-full border rounded focus:outline-none focus:border pl-3"
                     placeholder="Title"
                     type="text"
                     name="title"
                     /> 
                     <input
                     hidden 
-                    className="text-sm h-10 w-full  focus:outline-none focus:border pl-3"
+                    className="text-sm h-10 w-full border rounded focus:outline-none focus:border pl-3"
                     type="text" 
                     name= "email"
                     defaultValue={session?.user?.email}
                     />                 
                     <textarea 
-                    className="text-sm w-full  focus:outline-none focus:border pl-3"
+                    className="text-sm w-full border rounded focus:outline-none focus:border pl-3"
                     placeholder="Post"
                     name="post" 
                     id="" 
@@ -84,7 +84,7 @@ const posts = await userPost(session?.user?.email);
                     <SubmitBtn label="Submit"/>
                 </form>
             </div>
-            <h1 className="text-xl text-white mt-24 mb-6"
+            <h1 className="text-xl mt-24 mb-6"
             >Post List</h1> 
             {posts && posts.map((e:any, i:any) => (
                 <div key={i} className="ml-5 lg:w-[700px] md:w-[600px] sm:w-[400px] xs:w-[300px] mt-5 border rounded flex justify-center" >

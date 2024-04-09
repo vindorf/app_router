@@ -45,7 +45,7 @@ const AdminPage = async () => {
         </div>
         
       {session?.user?.role === "admin" && (
-     <div className="text-white flex flex-col items-center ml-44">
+     <div className= "flex flex-col items-center ml-44">
       <p className="w-3/4 text-center mt-3 border-b pb-3">All posts</p>
           {posts.length > 0 &&
             posts.map((e, i) => (
@@ -74,7 +74,7 @@ const AdminPage = async () => {
             ))}
         </div>
       )}
-      <Table></Table>
+      {/* <Table></Table> */}
     </div>
   );
 };
