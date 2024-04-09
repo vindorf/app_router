@@ -49,7 +49,7 @@ const Account = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   return (
-    <>
+    <div className="ml-44">
       <Container 
       className='text-white'
       label="Login">
@@ -78,7 +78,7 @@ const Account = () => {
           )}
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

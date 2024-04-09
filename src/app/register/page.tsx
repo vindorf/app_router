@@ -49,11 +49,11 @@ const submitHandler = async (formData: FormData) => {
 
 export default async function () {
   return (
-    <>
+    <div className="m-44 mt-16">
       <Container 
       className='text-white'
       label="Register">
-        <form className="flex flex-col w-56 p-3 gap-3" action={submitHandler}>
+        <form className="flex flex-col items-center  w-56 p-3 gap-3" action={submitHandler}>
           <ErrorBoundary>
             <CustomInput type="text" placeholder="Name" name="name" />
             <CustomInput
@@ -68,10 +68,10 @@ export default async function () {
             />
           </ErrorBoundary>
           <CustomBtn 
-          className='border-t'
+          className='border-t w-full'
           type="submit" label="Register" />
         </form>
       </Container>
-    </>
+    </div>
   );
 }

@@ -15,11 +15,14 @@ export default async function ProductList() {
   const apiData = await getProducts();
 
   return (
-    <div className="flex flex-col justify-start items-center">
-      <h1 className="text-xl  mt-24 mb-16 w-full text-center"
-      >Product List</h1>
-
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3 ml-28">
+    <div className="flex flex-col  items-center justify-center">
+      <div className="text-white lg:w-3/4 inset-0 flex flex-col justify-start items-center ml-64 ">
+      <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
+      <b className="text-[50px]"
+      >Product List</b>
+      </div>
+      </div>
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3 ml-64">
         {apiData &&
           apiData.map((e, i) => (
             <a key={i} href={`/products/${e._id}`}>             
