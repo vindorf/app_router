@@ -30,7 +30,7 @@ const AdminPage = async () => {
 
   return (
     <div className="mb-16">
-      <div className="text-white  inset-0 flex flex-col justify-start items-center ml-44 mr-16">
+      <div className="text-white  inset-0 flex flex-col justify-start items-center ml-64 mr-16">
       <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
           <b className="text-[50px]">Admin Page</b>
           {session?.user?.role !== "admin" ? (
@@ -45,7 +45,7 @@ const AdminPage = async () => {
         </div>
         
       {session?.user?.role === "admin" && (
-     <div className="text-white flex flex-col items-center ml-5">
+     <div className="text-white flex flex-col items-center ml-44">
       <p className="w-3/4 text-center mt-3 border-b pb-3">All posts</p>
           {posts.length > 0 &&
             posts.map((e, i) => (

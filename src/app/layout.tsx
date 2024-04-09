@@ -23,10 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
  
 }) {
+  const theme = 'bg-[#84adad]'
 
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-[#84adad] text-zinc-500`}>  
+      <body className={`${inter.className} ${theme} text-zinc-500`}>  
         <AuthProvider>
         <Header />
         {children}       

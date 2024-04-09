@@ -99,16 +99,9 @@ export default function Home() {
   }, [refPw]);
 
   return (
-    <main
-      className="flex flex-col justify-start mx-auto ml-64 items-center relative"
-      style={{
-        width: "80vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
-      <div className="text-white absolute inset-0 flex flex-col justify-start items-center m-auto">
-        <div className="mt-24 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
+    <main className="ml-64 mt-44 mr-24">
+      <div className="text-white lg:w-full inset-0 flex flex-col justify-start items-center ">
+        <div className=" mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded">
           <b className="text-[50px]">Main Page</b>
         </div>
 
