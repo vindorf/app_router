@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const emailExists = await User.findOne({ email: email});
 
-    if(emailExists) {
+    if(emailExists.email && email !== emailExists.email) {
       return NextResponse.json({message: 'Email occupied', status: 400})
 
     }

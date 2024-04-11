@@ -18,6 +18,7 @@ const userSchema = new Schema({
         required: true,
     },
     posts:[{ type: Schema.Types.ObjectId, ref: 'Post' }],
+    cart: [{ type: Schema.Types.ObjectId, ref: 'Product'}]
 },
 {timestamps: true},
 );
