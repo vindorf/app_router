@@ -16,6 +16,7 @@ const Header = () => {
           <HeaderLink href="/" label="Main" />
           <HeaderLink href="/user" label="UserAPI" />
           <HeaderLink href="/products" label="ProdDB" />
+          <HeaderLink href="/cart" label="Cart" />
           <HeaderLink href="/posts" label="PostDB" />
           <HeaderLink href="/only_admin" label="Admin" />
           <LogoutBtn></LogoutBtn>

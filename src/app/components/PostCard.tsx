@@ -1,11 +1,14 @@
+
 import React from "react";
 import { MdOutlineKeyboardReturn } from "react-icons/md";
+
 
 type PostProps = {
   title: string;
   post: string;
 };
 const PostCard = ({ title, post }: PostProps) => {
+
   return (
     <div className="flex">
       <div className="ml-24 pr-5 border-r grid gap-3 w-[450px]">
