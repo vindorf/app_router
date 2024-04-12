@@ -33,7 +33,7 @@ export default async function ProductList() {
         {apiData &&
           apiData.map((e, i) => (
             <div key={i} >             
-                <ProductCard id={e._id.toString()} title={e.title} image={e.image} />            
+                <ProductCard _id={e._id.toString()} title={e.title} image={e.image} />            
             </div>
           ))}
       </div>

@@ -1,16 +1,30 @@
 "use client"
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCartStore } from "../store/cartStore";
+import { useSession } from "next-auth/react";
 
 
 const CartPage = () => {
-  const {cart, removeFromCart, addToCart, clearCart} = useCartStore((state) => ({
+  const {data:session} = useSession();
+  const uMail = session?.user?.email;
+  const {cart, removeFromCart, addToCart, clearCart, fetch} = useCartStore((state) => ({
+    fetch: state.fetch,
     cart: state.cart,
     removeFromCart: state.removeFromCart,
     addToCart: state.addToCart,
     clearCart: state.clearCart
   }))
+
+useEffect(() => {
+  if(uMail) {
+    fetch(uMail);
+  }
+  
+},[])
+// console.log('MAIL', uMail)
+// console.log('CART', cart)
+
   return (
     <div className="mt-5 ml-64 mr-16">
       <div className="text-white  inset-0 flex flex-col justify-start items-center">
@@ -28,13 +42,10 @@ const CartPage = () => {
          
         </div>
       </div>
-      <p>Cart Items {cart.length} </p>
+      <p>Cart Items {cart && cart.length} </p>
       {cart && cart.map((e:any) => 
-      <div className="border p-2">
-      <p>{e.id} </p>
-      <button 
-      className="hover:underline"
-      onClick={() => {removeFromCart(e.id)}}>Remove</button>
+      <div key={e._id} className="border p-2">
+      <p>{e._id} </p>
       </div>
       )}
     </div>
