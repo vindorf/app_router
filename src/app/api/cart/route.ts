@@ -32,7 +32,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function DELETE(req: NextRequest, res: NextResponse) {
+export async function PUT(req: NextRequest, res: NextResponse) {
     const body = await req.json();
     const {email, _id} = body;
 
@@ -45,7 +45,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
            await user.save();
         return NextResponse.json({ user });
       } catch (error) {
-        return NextResponse.json({ message: "error adding to cart" });
+        return NextResponse.json({ message: "error removing from cart" });
       }
 
 

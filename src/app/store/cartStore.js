@@ -15,7 +15,10 @@ export const useCartStore = create((set) => ({
   addToCart: async (email, _id) => {
     await axios.post('/api/cart/',{email: email, _id:_id});
   },
-  removeFromCart: (productID) => set((state) => ({cart: state.cart.filter(product => product.id !== productID)})) ,
+  // removeFromCart: (productID) => set((state) => ({cart: state.cart.filter(product => product.id !== productID)})) ,
+  removeFromCart: async (email, _id) => {
+    await axios.put('/api/cart/', {email: email, _id: _id});
+  },
   clearCart: () => set({cart: []}),
 }));
 
