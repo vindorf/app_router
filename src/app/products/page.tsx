@@ -5,7 +5,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-//import { useCartStore } from "../store/cartStore";
+import { MdOutlineKeyboardReturn } from "react-icons/md";
+
 
 
 export default async function ProductList() {
@@ -26,14 +27,19 @@ export default async function ProductList() {
       >Product List</b>
       <Link 
       className="bg-zinc-900 hover:underline pb-2"
-      href='/cart'>Your Cart</Link>
+      href='/cart'>
+         <div className="flex items-center justify-end gap-2">
+              <MdOutlineKeyboardReturn/>
+              Your cart
+              </div>
+      </Link>
       </div>
       </div>
       <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3 ml-64">
         {apiData &&
           apiData.map((e, i) => (
             <div key={i} >             
-                <ProductCard _id={e._id.toString()} title={e.title} image={e.image} />            
+                <ProductCard _id={e._id.toString()} title={e.title} image={e.image} price={e.price}/>            
             </div>
           ))}
       </div>
