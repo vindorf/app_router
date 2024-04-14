@@ -18,8 +18,9 @@ const CartCart = () => {
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const fetch = useCartStore((state) => state.fetch)
   const [item, setItem] = useState<{[key: string]: number}>({});
-  console.log("ITEMS", item);
-  console.log('CART', cart)
+  const [total, setTotal] = useState<number>(0);
+  // console.log("ITEMS", item);
+  // console.log('CART', cart)
 
   const defCart = () => {
     let dCart: Record<string, number> = {};
@@ -35,16 +36,39 @@ const CartCart = () => {
     }
   }, [cart]);
 
+  useEffect(() => {
+    let sum = 0;
+    for (const id in item) {
+      const e = cart.find((e) => e._id === id);
+      if (e) {
+        sum += item[id] * (e.price ?? 0);
+      }
+    }
+    setTotal(sum);
+  }, [item]);
+
   const handleDelete = async (ID: string) => {
     await removeFromCart(uMail, ID);
     await fetch(uMail);
   };
 
+  const handlePlus = (id:string) => {
+    setItem({...item, [id]: item[id] + 1 });
+  };
+
+  const handleMinus = (id:string) => {
+    if (item[id] > 1) {
+      setItem({ ...item, [id]: item[id] - 1 });
+    }
+  }
+
   return (
     <>
       {cart &&
-        cart.map((e: Props) => 
-          <div className="border-b mb-4 py-2 px-3 w-full flex justify-between ">
+        cart.map((e: Props, i:any) => 
+          <div 
+          key={i}
+          className="border-b mb-4 py-2 px-3 w-full flex justify-between ">
             <div className="flex flex-col items-start w-full">
               <b className="font-mono mb-2 w-full pl-2 bg-zinc-100 opacity-80 ">
                 {e.title}
@@ -53,23 +77,27 @@ const CartCart = () => {
             </div>
 
             <div className="flex h-6 mx-3 justify-center items-center font-mono">
-              <button className="w-8 border rounded-l bg-zinc-100 hover:bg-zinc-200">
+              <button 
+              onClick={() => handlePlus(e._id)}
+              className="w-8 border rounded-l bg-zinc-100 hover:bg-zinc-200">
                 +
               </button>
               <input
                 className="text-center border-y  w-[50px]"
                 type="text"
-                value={item[e._id]}
+                defaultValue={item[e._id]}
                 readOnly={true}
               />
-              <button className="w-8 border rounded-r bg-zinc-100 hover:bg-zinc-200">
+              <button 
+              onClick={() => {handleMinus(e._id)}}
+              className="w-8 border rounded-r bg-zinc-100 hover:bg-zinc-200">
                 -
               </button>
             </div>
 
             <div className="flex flex-col items-end justify-between w-full">
               <b className="font-mono w-full text-end pr-2 bg-zinc-100">
-                {e.price} €
+                {e.price * item[e._id]} €
               </b>
               <p
                 className="hover:underline cursor-pointer text-xs pr-2"
@@ -80,6 +108,10 @@ const CartCart = () => {
             </div>
           </div>
         )}
+        <div className="flex items-center justify-between px-2 font-mono text-[20px] border-y">
+          <b>Total:</b>
+          <b>{total} €</b>
+        </div>
     </>
   );
 };

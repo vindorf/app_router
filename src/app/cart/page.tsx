@@ -12,9 +12,8 @@ const CartPage = () => {
   const { data: session } = useSession();
   const uMail = session?.user?.email;
   const uName = session?.user?.name;
-  let total = 0;
   const [msg, setMsg] = useState("");
-  const { fetch, cart,} = useCartStore((state) => ({
+  const { fetch, cart } = useCartStore((state) => ({
     fetch: state.fetch,
     cart: state.cart,
   }));
@@ -23,19 +22,11 @@ const CartPage = () => {
     redirect("/login");
   }
 
- 
-
   useEffect(() => {
     if (uMail) {
       fetch(uMail);
     }
   }, []);
-
-  if (cart) {
-    for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price;
-    }
-  }
 
   return (
     <div className="mt-5 ml-64 mr-16 mb-24">
@@ -57,11 +48,7 @@ const CartPage = () => {
         Cart Items {cart && cart.length}{" "}
       </b>
       <div className="border rounded mt-4 p-3 shadow-lg">
-        <CartCart/>
-        <div className="flex items-center justify-between px-2 font-mono text-[20px] border-y">
-          <b>Total:</b>
-          <b>{total} €</b>
-        </div>
+        <CartCart />
       </div>
     </div>
   );
