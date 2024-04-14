@@ -15,10 +15,16 @@ export const ProductCard = ({ _id, title, image, price }: CardProps) => {
   const uMail = session?.user?.email;
   const [msg, setMsg] = useState("");
   const addToCart = useCartStore((state) => state.addToCart);
+  const status = useCartStore((state) => state.status);
+  
 
   const handlerAdd = (title: string) => {
-    addToCart(uMail, { _id });
-    setMsg(`${title} added successfully`);
+    addToCart(uMail, { _id })
+    if(status === 200) {
+      setMsg(`${title} added successfully`);
+    } else if(status == 400) {
+      setMsg(`${title} already in cart`);
+    }
     setTimeout(() => {
       setMsg("");
     }, 2000);

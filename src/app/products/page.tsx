@@ -30,7 +30,7 @@ export default async function ProductList() {
       href='/cart'>
          <div className="flex items-center justify-end gap-2">
               <MdOutlineKeyboardReturn/>
-              Your cart
+              to cart
               </div>
       </Link>
       </div>

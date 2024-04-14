@@ -12,25 +12,18 @@ const CartPage = () => {
   const { data: session } = useSession();
   const uMail = session?.user?.email;
   const uName = session?.user?.name;
+  let total = 0;
   const [msg, setMsg] = useState("");
-  const { fetch, cart, removeFromCart } = useCartStore((state) => ({
+  const { fetch, cart,} = useCartStore((state) => ({
     fetch: state.fetch,
     cart: state.cart,
-    removeFromCart: state.removeFromCart,
   }));
 
   if (!session) {
     redirect("/login");
   }
 
-  const handleDelete = async (ID: string, title: string) => {
-    await removeFromCart(uMail, ID);
-    setMsg(`${title} removed successfully`);
-    setTimeout(() => {
-      setMsg("");
-    }, 2000);
-    await fetch(uMail);
-  };
+ 
 
   useEffect(() => {
     if (uMail) {
@@ -38,12 +31,11 @@ const CartPage = () => {
     }
   }, []);
 
-  let total = 0;
-  for (let i = 0; i < cart.length; i++) {
-    total += cart[i].price;
+  if (cart) {
+    for (let i = 0; i < cart.length; i++) {
+      total += cart[i].price;
+    }
   }
-  console.log("TOTAL", total);
-  console.log("CART", cart);
 
   return (
     <div className="mt-5 ml-64 mr-16 mb-24">
@@ -54,7 +46,7 @@ const CartPage = () => {
             <Link className="bg-zinc-900 hover:underline" href="/products">
               <div className="flex items-center justify-center gap-2">
                 <MdOutlineKeyboardReturn />
-                Products
+                to products
               </div>
             </Link>
           </div>
@@ -65,19 +57,7 @@ const CartPage = () => {
         Cart Items {cart && cart.length}{" "}
       </b>
       <div className="border rounded mt-4 p-3 shadow-lg">
-        {cart &&
-          cart.map((e: any, i: any) => (
-            <CartCart
-              key={i}
-              _id={e._id}
-              title={e.title}
-              image={e.image}
-              price={e.price}
-              remove={() => {
-                handleDelete(e._id, e.title);
-              }}
-            />
-          ))}
+        <CartCart/>
         <div className="flex items-center justify-between px-2 font-mono text-[20px] border-y">
           <b>Total:</b>
           <b>{total} €</b>

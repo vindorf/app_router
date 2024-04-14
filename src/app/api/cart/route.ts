@@ -10,10 +10,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
     await connectDB();
 
     const user = await User.findOne({ email: email });
-   
-       await user.cart.push(_id); 
-       await user.save();
-    return NextResponse.json({ user });
+
+    if (!user.cart.includes(_id._id)) {
+      user.cart.push(_id._id);
+      await user.save();
+    } else {
+      return NextResponse.json({
+        message: "product already exists",
+        status: 400,
+      });
+    }
+    return NextResponse.json({ user, status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "error adding to cart" });
   }
@@ -24,7 +31,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     await connectDB();
     const searchParams = req.nextUrl.searchParams;
     const query = searchParams.get("email");
-    const user = await User.findOne({ email: query }).populate('cart')
+    const user = await User.findOne({ email: query }).populate("cart");
     const cart = user.cart;
     return NextResponse.json({ cart });
   } catch (error) {
@@ -33,20 +40,18 @@ export async function GET(req: NextRequest, res: NextResponse) {
 }
 
 export async function PUT(req: NextRequest, res: NextResponse) {
-    const body = await req.json();
-    const {email, _id} = body;
+  const body = await req.json();
+  const { email, _id } = body;
 
-    try {
-        await connectDB();
-    
-        const user = await User.findOne({ email: email });
-       
-           await user.cart.pull(_id); 
-           await user.save();
-        return NextResponse.json({ user });
-      } catch (error) {
-        return NextResponse.json({ message: "error removing from cart" });
-      }
+  try {
+    await connectDB();
 
+    const user = await User.findOne({ email: email });
 
+    await user.cart.pull(_id);
+    await user.save();
+    return NextResponse.json({ user });
+  } catch (error) {
+    return NextResponse.json({ message: "error removing from cart" });
+  }
 }
