@@ -16,13 +16,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
       await user.save();
     } else {
       return NextResponse.json({
-        message: "product already exists",
+        message: "product already exists in cart",
         status: 400,
       });
     }
-    return NextResponse.json({ user, status: 200 });
+    return NextResponse.json({message: 'product added successfuly', status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: "error adding to cart" });
+    return NextResponse.json({ message: "error adding to cart", status: 500 });
   }
 }
 

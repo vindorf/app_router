@@ -18,13 +18,9 @@ export const ProductCard = ({ _id, title, image, price }: CardProps) => {
   const status = useCartStore((state) => state.status);
   
 
-  const handlerAdd = (title: string) => {
-    addToCart(uMail, { _id })
-    if(status === 200) {
-      setMsg(`${title} added successfully`);
-    } else if(status == 400) {
-      setMsg(`${title} already in cart`);
-    }
+  const handlerAdd = async (title: string) => {
+    await addToCart(uMail, { _id })
+    setMsg(`${title} done`);
     setTimeout(() => {
       setMsg("");
     }, 2000);
@@ -32,13 +28,13 @@ export const ProductCard = ({ _id, title, image, price }: CardProps) => {
 
   return (
     <div className="p-2 justify-center items-center h-[370px] shadow hover:shadow-lg rounded">
-      <div className=" flex flex-col items-start bg-zinc-100 px-2 mb-1">
+      <div className=" flex flex-col rounded items-start bg-zinc-100 px-2 mb-1">
         <b className="text-zinc-500 text-[20px] font-mono">{title} </b>
       </div>
       <div className="w-56  flex flex-col justify-end items-center">
-        <a className="bg-white" href={`/products/${_id}`}>
-          <div className="h-[240px] w-56 border-y pt-2 pb-2">
-            <img className="w-full" src={`${image}`} />
+        <a className="bg-white rounded" href={`/products/${_id}`}>
+          <div className="h-[240px] w-56 rounded border-y pt-2 pb-2">
+            <img className="w-full rounded" src={`${image}`} />
           </div>
         </a>
         <div className="h-5 w-full text-center font-mono mb-2">

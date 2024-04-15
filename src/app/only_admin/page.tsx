@@ -55,15 +55,15 @@ const AdminPage = async () => {
                 <p className="font-extralight">Post: </p>
                 <p className="text-left">{e.post}</p>
                 
-                <p className="text-xs text-zinc-500 font-extralight my-2 p-1 bg-white"> User_Id: {JSON.stringify(e.user?._id)}</p>
-                <p className="text-xs text-zinc-500 font-extralight my-2 p-1 bg-white"> User_Name: {JSON.stringify(e.user?.name)}</p>
+                <p className="text-xs rounded text-zinc-500 font-extralight my-2 p-1 bg-white"> User_Id: {JSON.stringify(e.user?._id)}</p>
+                <p className="text-xs rounded text-zinc-500 font-extralight my-2 p-1 bg-white"> User_Name: {JSON.stringify(e.user?.name)}</p>
 
                 <div className="w-full">
                 <Link 
-                className="text-zinc-500 rounded-full flex w-full mt-4 font-light text-xs py-1 justify-center shadow-lg hover:bg-zinc-300 bg-zinc-200"
+                className="text-zinc-500 rounded-full flex w-full mt-4 font-light text-xs py-1 justify-center shadow-lg hover:bg-zinc-300 hover:underline bg-zinc-200"
                 href={`only_admin/${e.user?._id}`}>All posts of this user</Link>
                 <DeleteBtn
-                  className="text-zinc-500 rounded-full w-full mt-4 font-light text-xs py-1 shadow-lg"
+                  className="text-zinc-500 rounded-full w-full mt-4 font-light text-xs hover:underline py-1 shadow-lg"
                   label="Delete post"
                   value={JSON.stringify(e._id)}
                   onDelete={handleDelete}

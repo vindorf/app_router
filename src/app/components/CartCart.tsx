@@ -19,6 +19,7 @@ const CartCart = () => {
   const fetch = useCartStore((state) => state.fetch)
   const [item, setItem] = useState<{[key: string]: number}>({});
   const [total, setTotal] = useState<number>(0);
+
   // console.log("ITEMS", item);
   // console.log('CART', cart)
 
@@ -29,6 +30,9 @@ const CartCart = () => {
     }
     return dCart;
   };
+  useEffect(() => {
+    fetch(uMail)
+  },[]);
 
   useEffect(() => {
     if (cart) {
@@ -70,33 +74,34 @@ const CartCart = () => {
           key={i}
           className="border-b mb-4 py-2 px-3 w-full flex justify-between ">
             <div className="flex flex-col items-start w-full">
-              <b className="font-mono mb-2 w-full pl-2 bg-zinc-100 opacity-80 ">
+              <b className={`font-mono mb-2 w-full pl-2  rounded-r bg-zinc-300  `}>
                 {e.title}
               </b>
               <img className="w-14 pl-2" src={e.image} alt={e.title} />
             </div>
 
-            <div className="flex h-6 mx-3 justify-center items-center font-mono">
+            <div className="flex h-6 mx-3 justify-center  items-center font-mono">
               <button 
               onClick={() => handlePlus(e._id)}
-              className="w-8 border rounded-l bg-zinc-100 hover:bg-zinc-200">
+              className={`w-8  rounded-l bg-zinc-300 hover:bg-zinc-400 `}
+>
                 +
               </button>
               <input
-                className="text-center border-y  w-[50px]"
+                className="text-center bg-zinc-200  w-[50px]"
                 type="text"
                 defaultValue={item[e._id]}
                 readOnly={true}
               />
               <button 
               onClick={() => {handleMinus(e._id)}}
-              className="w-8 border rounded-r bg-zinc-100 hover:bg-zinc-200">
+              className="w-8  rounded-r bg-zinc-300 hover:bg-zinc-400">
                 -
               </button>
             </div>
 
             <div className="flex flex-col items-end justify-between w-full">
-              <b className="font-mono w-full text-end pr-2 bg-zinc-100">
+              <b className="font-mono w-full text-end pr-2  rounded-l bg-zinc-300">
                 {e.price * item[e._id]} €
               </b>
               <p

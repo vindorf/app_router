@@ -18,6 +18,8 @@ const CartPage = () => {
     cart: state.cart,
   }));
 
+  
+
   if (!session) {
     redirect("/login");
   }
@@ -34,7 +36,8 @@ const CartPage = () => {
         <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded flex flex-col">
           <b className="text-[50px]">{toCap(`${uName}`)}'s Cart</b>
           <div className="flex items-center justify-end mb-2">
-            <Link className="bg-zinc-900 hover:underline" href="/products">
+            <Link 
+            className="bg-zinc-900 hover:underline" href="/products">
               <div className="flex items-center justify-center gap-2">
                 <MdOutlineKeyboardReturn />
                 to products
@@ -45,7 +48,7 @@ const CartPage = () => {
         <div className="h-[30px] text-zinc-500">{msg && <p>{msg} </p>}</div>
       </div>
       <b className="w-full block text-center font-mono">
-        Cart Items {cart && cart.length}{" "}
+         {cart.length > 0 ? 'You have' + ' ' + cart.length+ ' ' + 'item in cart' : 'No items in cart'}
       </b>
       <div className="border rounded mt-4 p-3 shadow-lg">
         <CartCart />
