@@ -12,7 +12,6 @@ const CartPage = () => {
   const { data: session } = useSession();
   const uMail = session?.user?.email;
   const uName = session?.user?.name;
-  const [msg, setMsg] = useState("");
   const { fetch, cart } = useCartStore((state) => ({
     fetch: state.fetch,
     cart: state.cart,
@@ -45,10 +44,9 @@ const CartPage = () => {
             </Link>
           </div>
         </div>
-        <div className="h-[30px] text-zinc-500">{msg && <p>{msg} </p>}</div>
       </div>
       <b className="w-full block text-center font-mono">
-         {cart.length > 0 ? 'You have' + ' ' + cart.length+ ' ' + 'item in cart' : 'No items in cart'}
+         {cart !== 'undefined' && cart.length > 0 ? 'You have' + ' ' + cart.length+ ' ' + 'item in cart' : 'No items in cart'}
       </b>
       <div className="border rounded mt-4 p-3 shadow-lg">
         <CartCart />

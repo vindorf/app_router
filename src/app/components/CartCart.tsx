@@ -83,19 +83,19 @@ const CartCart = () => {
             <div className="flex h-6 mx-3 justify-center  items-center font-mono">
               <button 
               onClick={() => handlePlus(e._id)}
-              className={`w-8  rounded-l bg-zinc-300 hover:bg-zinc-400 `}
+              className={`w-8  rounded-l bg-zinc-300 hover:bg-zinc-400 focus:outline-none`}
 >
                 +
               </button>
               <input
-                className="text-center bg-zinc-200  w-[50px]"
+                className="text-center bg-zinc-200  w-[50px] focus:outline-none "
                 type="text"
                 defaultValue={item[e._id]}
                 readOnly={true}
               />
               <button 
               onClick={() => {handleMinus(e._id)}}
-              className="w-8  rounded-r bg-zinc-300 hover:bg-zinc-400">
+              className="w-8  rounded-r bg-zinc-300 hover:bg-zinc-400 focus:outline-none">
                 -
               </button>
             </div>
