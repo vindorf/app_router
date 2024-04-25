@@ -34,7 +34,12 @@ const CartPage = () => {
       <div className="text-white  inset-0 flex flex-col justify-start items-center">
         <div className="mt-40 mb-8 w-full bg-zinc-900 opacity-80 px-4 rounded flex flex-col">
           <b className="text-[50px]">{toCap(`${uName}`)}'s Cart</b>
-          <div className="flex items-center justify-end mb-2">
+          <div className="flex items-center justify-between mb-2">
+            <Link className="bg-zinc-900 hover:underline" href="/checkout">
+            <div>
+              Checkout
+            </div>
+            </Link>
             <Link 
             className="bg-zinc-900 hover:underline" href="/products">
               <div className="flex items-center justify-center gap-2">
