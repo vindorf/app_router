@@ -9,8 +9,8 @@ export const useCartStore = create((set) => ({
     set({ cart: await resp.data.cart });
   },
   addToCart: async (email, _id) => {
-   const res = await axios.post("/api/cart/", { email: email, _id: _id });
-   set({status: await res.data.status});
+    const res = await axios.post("/api/cart/", { email: email, _id: _id });
+    set({ status: await res.data.status });
   },
   removeFromCart: async (email, _id) => {
     await axios.put("/api/cart/", { email: email, _id: _id });

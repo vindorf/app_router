@@ -1,8 +1,29 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
 import { MdOutlineKeyboardReturn } from 'react-icons/md'
+import { useCartStore } from '../store/cartStore'
+import {useDefCartStore} from "../store/defCartStore"
 
 const Checkout = () => {
+    const {cart} = useCartStore((state) => ({
+        cart: state.cart,
+        total: state.total,
+    }));
+
+    const {dCart, setDCart, total, amount} = useDefCartStore((state) => ({
+        dCart: state.dCart,
+        setDCart: state.setDCart,
+        total: state.total,
+        amount: state.amount,
+    }))
+
+    console.log('DCART', dCart);
+    console.log('CART', cart);
+    console.log('TOTAL', total);
+
+
+
   return (
     <div className="mt-5 ml-64 mr-16 mb-24">
         <div className="text-white  inset-0 flex flex-col justify-start items-center">
@@ -17,6 +38,9 @@ const Checkout = () => {
                 </Link>
             </div>
             </div>
+        </div>
+        <div>
+            {amount &&  amount > 0 ? <b>You have {amount} items for {total} €</b> : <b>nothing</b> }
         </div>
     </div>
   )
